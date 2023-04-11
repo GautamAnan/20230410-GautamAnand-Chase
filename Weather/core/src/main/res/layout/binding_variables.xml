@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="data"
+            type="com.gautam.core.BaseData" />
+
+
+        <variable
+            name="viewModel"
+            type="com.gautam.core.BaseViewModel" />
+
+    </data>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+</layout>
