@@ -5,7 +5,10 @@ import android.util.LruCache
 
 object ImagesCache {
     private var imagesWarehouse: LruCache<String, Bitmap>? = null
-    fun initializeCache() {
+    init {
+        initializeCache()
+    }
+    private fun initializeCache() {
         val maxMemory = (Runtime.getRuntime().maxMemory() / 1024).toInt()
         val cacheSize = maxMemory / 8
         println("cache size = $cacheSize")
