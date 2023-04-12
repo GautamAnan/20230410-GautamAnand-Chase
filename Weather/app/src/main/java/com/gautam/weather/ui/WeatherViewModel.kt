@@ -19,7 +19,7 @@ class WeatherViewModel(
     private val weatherByLocationUseCase: CurrentWeatherByLocationUseCase
 ) : SharedBaseViewModel<WeatherData, WeatherEvents>(application, data) {
 
-     fun getWeatherByName(location :String ="Pune") {
+     fun getWeatherByName(location :String) {
         viewModelScope.launch {
             data.loading()
             weatherUseCase.execute(CurrentWeatherParams(location)).mapResult(
