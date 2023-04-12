@@ -3,7 +3,24 @@ package com.gautam.core.fundamentals
 import retrofit2.Response
 
 
+/**
+ * Response mapper
+ *
+ * @constructor Create empty Response mapper
+ */
 interface ResponseMapper {
+    /**
+     * Execute
+     *
+     * @param E
+     * @param R
+     * @param service
+     * @param success
+     * @param failure
+     * @receiver
+     * @receiver
+     * @receiver
+     */
     suspend fun <E, R> execute(
         service: suspend () -> Response<E>,
         success: (E, Int) -> R,
@@ -15,6 +32,18 @@ interface ResponseMapper {
         Result.Failure(Error.GenericError(message = exception.message.toString()))
     }
 
+    /**
+     * Execute with error message response
+     *
+     * @param E
+     * @param R
+     * @param service
+     * @param success
+     * @param failure
+     * @receiver
+     * @receiver
+     * @receiver
+     */
     suspend fun <E, R> executeWithErrorMessageResponse(
         service: suspend () -> Response<E>,
         success: (E, Int) -> R,

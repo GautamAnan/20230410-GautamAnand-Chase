@@ -6,9 +6,6 @@ import androidx.lifecycle.AndroidViewModel
 import com.gautam.core.fundamentals.SingleLiveEvent
 import org.koin.core.component.KoinComponent
 
-
-//@KoinApiExtension
-
 abstract class BaseViewModel<D : BaseData, E : BaseEvent>(
     application: Application,
     protected val data: D

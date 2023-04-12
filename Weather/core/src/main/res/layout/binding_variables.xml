@@ -11,6 +11,14 @@
             name="viewModel"
             type="com.gautam.core.BaseViewModel" />
 
+        <variable
+            name="sharedData"
+            type="com.gautam.core.BaseData" />
+
+        <variable
+            name="sharedViewModel"
+            type="com.gautam.core.SharedBaseViewModel" />
+
     </data>
 
     <View

@@ -1,9 +1,9 @@
 package com.gautam.domain.model
 
 data class SysModel(
-    val type: Int? = 0,
-   val id: Int? = 0,
-   val country: String? = "",
-   val sunrise: Long? = 0L,
-   val sunset: Long? = 0L,
+    var type: Int? = 0,
+   var id: Int? = 0,
+   var country: String? = "",
+   var sunrise: Long? = 0L,
+   var sunset: Long? = 0L,
 )

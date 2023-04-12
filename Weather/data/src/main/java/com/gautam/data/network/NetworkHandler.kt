@@ -8,6 +8,14 @@ import java.util.concurrent.TimeUnit
 val loggingInterceptor = HttpLoggingInterceptor()
     .apply { level = HttpLoggingInterceptor.Level.BODY }
 
+/**
+ * Get client
+ *
+ * @param timeOut
+ * @param context
+ * @param listInterceptor
+ * @return
+ */
 fun getClient(
     timeOut: Long,
     context: Context,

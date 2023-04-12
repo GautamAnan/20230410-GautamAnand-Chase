@@ -14,12 +14,24 @@ import com.gautam.core.fundamentals.EventListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.reflect.KClass
 
+/**
+ * Base fragment
+ *
+ * @param B
+ * @param E
+ * @param D
+ * @param VM
+ * @property layoutId
+ * @constructor
+ *
+ * @param viewModelClazz
+ */
 abstract class BaseFragment<B : ViewDataBinding, E : BaseEvent, D : BaseData, VM : BaseViewModel<D, E>>(
     viewModelClazz: KClass<VM>,
     @LayoutRes private val layoutId: Int
 ) : Fragment(), EventListener {
     private val viewModel: VM by viewModel(clazz = viewModelClazz)
-    private var binding: B? = null
+    var binding: B? = null
     private var eventListener: EventListener? = null
 
     override fun onCreateView(
@@ -52,8 +64,17 @@ abstract class BaseFragment<B : ViewDataBinding, E : BaseEvent, D : BaseData, VM
         binding = null
     }
 
+    /**
+     * Get initial data
+     *
+     */
     open fun getInitialData() {}
 
+    /**
+     * Setup view
+     *
+     * @param view
+     */
     protected abstract fun setupView(view: View)
 
     override fun onAttach(context: Context) {

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="sharedViewModel"
+            type="com.gautam.weather.ui.WeatherViewModel" />
+
+        <variable
+            name="viewModel"
+            type="com.gautam.weather.ui.view_weather.InformationPageViewModel" />
+
+        <variable
+            name="sharedData"
+            type="com.gautam.weather.ui.WeatherData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsvPMInfo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:layout_marginTop="50dp"
+                    android:id="@+id/tvLocation"
+                    android:layout_width="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:text="@{sharedData.model.name}"
+                    tools:text="Pune"
+                    android:onClickListener="@{sharedViewModel.changeLocation}"
+                    android:drawablePadding="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:drawableEndCompat="@drawable/editing" />
+
+
+                <ImageView
+                    android:id="@+id/ivWeatherImage"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_marginVertical="15dp"
+                    android:layout_marginStart="4dp"
+                    android:scaleType="centerInside"
+                    app:image_url="@{sharedData.model.weatherModelItems.get(0).icon}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvLocation"
+                    app:layout_constraintWidth_percent="0.2" />
+
+                <TextView
+                    android:id="@+id/tvHead"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:singleLine="true"
+                    android:text="Todays Details"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/ivWeatherImage" />
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="end"
+                    android:text="@{@string/todays_details(sharedData.model.weatherModelItems.get(0).main,sharedData.model.weatherModelItems.get(0).description)}"
+                    android:textColor="@color/black"
+                    android:textStyle="italic"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvHead"
+                    app:layout_constraintWidth_percent="0.5"
+                    tools:text="Ba dfew   wefwf fwewfef    ewfe" />
+
+                <include
+                    android:id="@+id/ll_temp"
+                    layout="@layout/layout_column_conditions_weather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:key="@{@string/temperature}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivWeatherImage"
+                    app:value="@{@string/temperature_setting(sharedData.model.mainModel.temp)}" />
+
+                <include
+                    android:id="@+id/ll_wind"
+                    layout="@layout/layout_column_conditions_weather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:key="@{@string/wind}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_temp"
+                    app:value="@{@string/wind_setting(sharedData.model.windModel.speed)}" />
+
+                <include
+                    android:id="@+id/ll_humidity"
+                    layout="@layout/layout_column_conditions_weather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:key="@{@string/humid}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_wind"
+                    app:value="@{@string/humid_setting(sharedData.model.mainModel.humidity)}" />
+
+                <include
+                    android:id="@+id/ll_cloud_cover"
+                    layout="@layout/layout_column_conditions_weather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:key="@{@string/cloud_cover}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_humidity"
+                    app:value="@{@string/humid_setting(sharedData.model.clouds.all)}" />
+
+                <include
+                    android:id="@+id/ll_visibilty"
+                    layout="@layout/layout_column_conditions_weather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:key="@{@string/visibilty}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_cloud_cover"
+                    app:value="@{@string/visibilty_setting(sharedData.model.visibility)}" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

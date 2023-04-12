@@ -49,6 +49,8 @@ dependencies {
     implementation commonDependencies.kotlin
     implementation commonDependencies.ktx
     implementation commonDependencies.koin
+    implementation commonDependencies.koinViewmodel
+    implementation commonDependencies.koinExt
     implementation commonDependencies.viewModel
     implementation commonDependencies.appcompat
     implementation commonDependencies.material

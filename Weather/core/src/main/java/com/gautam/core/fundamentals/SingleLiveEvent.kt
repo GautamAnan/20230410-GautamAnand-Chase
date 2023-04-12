@@ -6,6 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import java.util.concurrent.atomic.AtomicBoolean
 
+/**
+ * Single live event
+ *
+ * @param T
+ * @constructor Create empty Single live event
+ */
 class SingleLiveEvent<T> : MutableLiveData<T>() {
 
     private val mPending = AtomicBoolean(false)
@@ -26,17 +32,27 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
     }
 
     /**
-     * Used for cases where T is Void, to make calls cleaner.
+     * Call
+     *
      */
     @MainThread
     fun call() {
         value = null
     }
 
+    /**
+     * Invoke
+     *
+     */
     operator fun invoke() {
         call()
     }
 
+    /**
+     * Invoke
+     *
+     * @param data
+     */
     operator fun invoke(data: T) {
         value = data
     }

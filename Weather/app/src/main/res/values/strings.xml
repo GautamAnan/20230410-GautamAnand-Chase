@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Weather</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="temperature_setting">%s°C</string>
+    <string name="wind_setting">%s m/s</string>
+    <string name="humid_setting">%s percent</string>
+    <string name="visibilty_setting">%s mi</string>
+    <string name="temperature">Temperature</string>
+    <string name="wind">Wind</string>
+    <string name="humid">Humidity</string>
+    <string name="cloud_cover">Cloud Cover</string>
+    <string name="visibilty">Visibility</string>
+    <string name="todays_details">%s - %s</string>
 </resources>

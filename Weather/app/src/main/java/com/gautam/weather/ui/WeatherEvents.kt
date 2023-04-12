@@ -1,10 +1,10 @@
 package com.gautam.weather.ui
 
 import com.gautam.core.BaseEvent
-
+import com.gautam.domain.model.CurrentWeatherModel
 
 sealed class WeatherEvents : BaseEvent {
-    object ShowLoginScreen : WeatherEvents()
-
+    object ChangeLocation : WeatherEvents()
+    object CallHomeScreen : WeatherEvents()
 
 }

@@ -1,7 +1,7 @@
 ext {
     kotlin_version = '1.7.0'
     ktx_version = '1.8.0'
-    koin_version = "3.1.2"
+    koin_version = "2.2.2"
     viewModel_version = '2.5.0'
     appcompat_version = '1.4.2'
     material_version = '1.6.1'
@@ -23,7 +23,10 @@ ext {
     commonDependencies = [
             kotlin                     : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
             ktx                        : "androidx.core:core-ktx:$ktx_version",
-            koin                       : "io.insert-koin:koin-android:$koin_version",
+            koin                       : "org.koin:koin-android:$koin_version",
+            koinScope                  : "org.koin:koin-androidx-scope:$koin_version",
+            koinViewmodel              : "org.koin:koin-androidx-viewmodel:$koin_version",
+            koinExt                    : "org.koin:koin-androidx-ext:$koin_version",
             appcompat                  : "androidx.appcompat:appcompat:$appcompat_version",
             material                   : "com.google.android.material:material:$material_version",
             viewModel                  : "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModel_version",

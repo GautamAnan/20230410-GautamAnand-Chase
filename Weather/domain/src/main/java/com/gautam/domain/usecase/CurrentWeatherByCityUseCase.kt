@@ -7,6 +7,12 @@ import kotlin.coroutines.CoroutineContext
 import com.gautam.core.fundamentals.Result
 import com.gautam.core.fundamentals.Error
 
+/**
+ * Current weather by city use case
+ *
+ * @property repository
+ * @constructor Create empty Current weather by city use case
+ */
 class CurrentWeatherByCityUseCase(private val repository: WeatherRepository) :
     BaseUseCase<CurrentWeatherParams, CurrentWeatherModel> {
     override suspend fun execute(
@@ -16,4 +22,10 @@ class CurrentWeatherByCityUseCase(private val repository: WeatherRepository) :
 
 }
 
+/**
+ * Current weather params
+ *
+ * @property city
+ * @constructor Create empty Current weather params
+ */
 data class CurrentWeatherParams(val city: String)

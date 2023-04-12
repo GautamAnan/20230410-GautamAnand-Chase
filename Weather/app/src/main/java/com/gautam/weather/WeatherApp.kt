@@ -20,11 +20,11 @@ class WeatherApp: Application() {
                 listOf(
                     apiModule,
                     networkModule,
-                    presentationModule,
                     useCaseModule,
                     repositoryModule,
                     sourceModule,
                     mapperModule,
+                    presentationModule,
                 )
             )
         }
