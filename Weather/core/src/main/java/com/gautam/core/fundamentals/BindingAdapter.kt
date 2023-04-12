@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.gautam.core.BaseListAdapter
 import com.gautam.core.fundamentals.Constants.BASE_URL
 
 object BindingAdapter {
@@ -53,6 +54,16 @@ object BindingAdapter {
         })
     }
 
+    @JvmStatic
+    @BindingAdapter("onClickListItemListener")
+    fun setOnItemClickListener(
+        recyclerView: RecyclerView,
+        onListItemClickListener: (model: Any, viewId: Int, clickedPosition: Int) -> Unit
+    ) {
+        (recyclerView.adapter as BaseListAdapter<Any, *>).setOnListItemClickListener(
+            onListItemClickListener
+        )
+    }
 
 
 }

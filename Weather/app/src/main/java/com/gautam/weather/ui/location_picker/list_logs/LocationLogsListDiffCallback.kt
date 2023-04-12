@@ -9,16 +9,16 @@ import com.gautam.domain.model.WeatherModel
  *
  * @constructor Create empty Weather logs list diff callback
  */
-class LocationLogsListDiffCallback : DiffUtil.ItemCallback<WeatherModel>() {
+class LocationLogsListDiffCallback : DiffUtil.ItemCallback<String>() {
     override fun areItemsTheSame(
-        oldItem: WeatherModel,
-        newItem: WeatherModel
+        oldItem: String,
+        newItem: String
     ): Boolean =
-        oldItem == newItem
+        oldItem === newItem
 
     override fun areContentsTheSame(
-        oldItem: WeatherModel,
-        newItem: WeatherModel
+        oldItem: String,
+        newItem: String
     ): Boolean =
         oldItem == newItem
 }

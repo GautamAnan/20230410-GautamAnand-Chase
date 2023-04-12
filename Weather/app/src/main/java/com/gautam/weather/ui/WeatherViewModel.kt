@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.viewModelScope
 import com.gautam.core.BaseViewModel
 import com.gautam.core.SharedBaseViewModel
+import com.gautam.core.utils.NetworkUtils
 import com.gautam.domain.usecase.CurrentWeatherByCityUseCase
 import com.gautam.domain.usecase.CurrentWeatherByLocationParams
 import com.gautam.domain.usecase.CurrentWeatherByLocationUseCase
@@ -15,47 +16,58 @@ import kotlinx.coroutines.launch
 class WeatherViewModel(
     application: Application,
     data: WeatherData,
+    private val networkUtils: NetworkUtils,
     private val weatherUseCase: CurrentWeatherByCityUseCase,
     private val weatherByLocationUseCase: CurrentWeatherByLocationUseCase
 ) : SharedBaseViewModel<WeatherData, WeatherEvents>(application, data) {
 
-     fun getWeatherByName(location :String) {
-        viewModelScope.launch {
-            data.loading()
-            weatherUseCase.execute(CurrentWeatherParams(location)).mapResult(
-                {
-                    data.hideLoading()
-                    data.model.postValue(it)
-                    updateEvent(WeatherEvents.CallHomeScreen)
-                }, {
-                    it.toString()
-                    data.error()
-                }
-            )
+    // Search the weather data as per the name of the location
+    fun getWeatherByName(location: String) {
+        if (networkUtils.isConnected()) {
+            viewModelScope.launch {
+                data.loading()
+                weatherUseCase.execute(CurrentWeatherParams(location)).mapResult(
+                    {
+                        data.hideLoading()
+                        data.locationSearchTexts.add(location)// add text to collection history as search was sucessful
+                        data.model.postValue(it)
+                    }, {
+                        data.error()
+                        updateEvent(WeatherEvents.CallError(it.toString()))
+                    }
+                )
+            }
         }
     }
 
-     fun getWeatherByLocation(latLng: LatLng) {
-        viewModelScope.launch {
-            data.loading()
-            weatherByLocationUseCase.execute(CurrentWeatherByLocationParams(latLng)).mapResult(
-                {
-                    data.hideLoading()
-                    data.model.postValue(it)
-                }, {
-                    data.error()
-                }
-            )
+    // Search the weather data as per the coordinates of the location
+    fun getWeatherByLocation(latLng: LatLng) {
+        if (networkUtils.isConnected()) {
+            viewModelScope.launch {
+                data.loading()
+                weatherByLocationUseCase.execute(CurrentWeatherByLocationParams(latLng)).mapResult(
+                    {
+                        data.hideLoading()
+                        data.model.postValue(it)
+                    }, {
+                        data.error()
+                        updateEvent(WeatherEvents.CallError(it.toString()))
+                    }
+                )
+            }
         }
     }
 
-
+   // location edit button was clicked
     val changeLocation = View.OnClickListener {
         updateEvent(WeatherEvents.ChangeLocation)
     }
 
-    val onBackClicked = View.OnClickListener {
+    // on back button was clicked
+    val onBackClicked = {
         updateEvent(WeatherEvents.CallHomeScreen)
     }
+
+    val locations = data.locationSearchTexts
 
 }

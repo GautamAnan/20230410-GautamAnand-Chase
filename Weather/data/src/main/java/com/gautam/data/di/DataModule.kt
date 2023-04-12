@@ -7,6 +7,7 @@ import com.gautam.data.source.remote.WeatherRemoteSourceImpl
 import com.gautam.data.source.remote.api.CurrentWeatherApiService
 import com.gautam.data.source.remote.mapper.WeatherMapper
 import com.gautam.domain.repository.WeatherRepository
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -23,7 +24,7 @@ val apiModule = module {
 }
 
 val repositoryModule = module {
-    single<WeatherRepository> { WeatherRepositoryImpl(source = get()) }
+    single<WeatherRepository> {  WeatherRepositoryImpl(source = get()) }
 }
 
 val sourceModule = module {

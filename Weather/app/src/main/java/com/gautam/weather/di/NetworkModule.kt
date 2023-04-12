@@ -3,6 +3,7 @@ package com.gautam.weather.di
 import com.gautam.core.fundamentals.Constants.BASE_URL
 import com.gautam.core.fundamentals.Constants.CLIENT_MODULE
 import com.gautam.core.fundamentals.Constants.TIME_OUT
+import com.gautam.core.utils.NetworkUtils
 import com.gautam.data.network.RestClientModule
 import com.gautam.data.network.getClient
 import org.koin.core.qualifier.named
@@ -15,6 +16,8 @@ val networkModule = module {
             getClient(TIME_OUT, get())
         )
     }
-
+    single {
+        NetworkUtils(get())
+    }
 
 }

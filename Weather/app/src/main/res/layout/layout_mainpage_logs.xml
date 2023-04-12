@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.gautam.domain.model.WeatherModel" />
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,19 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            app:layout_constraintWidth_percent="0.2"
-            android:id="@+id/ivWeatherImage"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginVertical="15dp"
-            android:scaleType="centerInside"
-            app:image_url="@{data.icon}"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <TextView
             android:id="@+id/tvHead"
             android:layout_width="0dp"
@@ -36,29 +23,12 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:singleLine="true"
-            android:text="@{data.main}"
+            android:text="@{data}"
+            android:textColor="@color/design_default_color_secondary_variant"
             app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="@{data.main.empty ? View.GONE :View.VISIBLE}"
-            app:layout_constraintTop_toTopOf="@id/ivWeatherImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Caew edfefww   weffwf" />
-
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:text="@{data.description}"
-            android:visibility="@{data.description.empty ? View.GONE :View.VISIBLE}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvHead"
-            app:layout_constraintWidth_percent="0.5"
-            tools:text="Ba dfew   wefwf fwewfef    ewfe" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

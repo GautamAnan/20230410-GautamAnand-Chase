@@ -1,7 +1,11 @@
 package com.gautam.core
 
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +34,7 @@ abstract class BaseFragment<B : ViewDataBinding, E : BaseEvent, D : BaseData, VM
     viewModelClazz: KClass<VM>,
     @LayoutRes private val layoutId: Int
 ) : Fragment(), EventListener {
-    private val viewModel: VM by viewModel(clazz = viewModelClazz)
+    val viewModel: VM by viewModel(clazz = viewModelClazz)
     var binding: B? = null
     private var eventListener: EventListener? = null
 

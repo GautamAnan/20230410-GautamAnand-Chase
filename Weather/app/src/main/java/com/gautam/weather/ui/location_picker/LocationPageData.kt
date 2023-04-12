@@ -5,5 +5,6 @@ import com.gautam.core.BaseData
 
 
 class LocationPageData(
-    val textToSearch: MutableLiveData<String> = MutableLiveData("")
-): BaseData()
+    val textToSearch: MutableLiveData<String> = MutableLiveData(""),
+    val listHistory: MutableLiveData<List<String>> = MutableLiveData(emptyList()),
+) : BaseData()

@@ -1,7 +1,6 @@
 package com.gautam.weather.di
 
 
-
 import com.gautam.weather.ui.WeatherData
 import com.gautam.weather.ui.WeatherViewModel
 import com.gautam.weather.ui.location_picker.LocationPageData
@@ -17,6 +16,7 @@ val presentationModule = module {
         WeatherViewModel(
             application = androidApplication(),
             data = WeatherData(),
+            get(),
             get(),
             get()
         )

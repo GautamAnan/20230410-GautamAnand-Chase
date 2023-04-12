@@ -11,6 +11,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.gautam.core.BaseActivity
 import com.gautam.core.BaseEvent
+import com.gautam.core.fundamentals.displayErrorDialog
 import com.gautam.weather.R
 import com.gautam.weather.databinding.ActivityWeatherBinding
 import com.gautam.weather.ui.location_picker.list_logs.LocationLogsListAdapter
@@ -36,6 +37,14 @@ class WeatherActivity :
            }
            is WeatherEvents.CallHomeScreen -> {
                finishCurrentFragment()
+           }
+
+           is WeatherEvents.NetworkError -> {
+               this.displayErrorDialog("No network connection. Please try again")
+           }
+
+           is WeatherEvents.CallError -> {
+               this.displayErrorDialog(event.errorMsg)
            }
        }
     }

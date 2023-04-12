@@ -15,6 +15,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.gautam.core.BaseEvent
 
 import com.gautam.core.SharedBaseFragment
+import com.gautam.core.fundamentals.displayErrorDialog
 import com.gautam.weather.R
 import com.gautam.weather.databinding.FragmentWeatherInfoBinding
 import com.gautam.weather.ui.WeatherData
@@ -40,7 +41,8 @@ class InformationPageFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fusedLocationClient = this.let { LocationServices.getFusedLocationProviderClient(requireActivity()) }
+        fusedLocationClient =
+            this.let { LocationServices.getFusedLocationProviderClient(requireActivity()) }
         locationRequest = LocationRequest.create()
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         locationRequest.interval = 3 * 1000
@@ -118,11 +120,16 @@ class InformationPageFragment :
             else -> {
                 // permission denied, boo! Disable the
                 // functionality that depends on this permission.
-                Toast.makeText(requireContext(), "location permission denied", Toast.LENGTH_LONG)
+                Toast.makeText(
+                    requireContext(),
+                    "location permission denied",
+                    Toast.LENGTH_LONG
+                )
                     .show()
                 activity?.finish()
             }
         }
+
     }
 
 

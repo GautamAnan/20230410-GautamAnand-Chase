@@ -15,7 +15,7 @@ import com.gautam.weather.databinding.LayoutMainpageLogsBinding
  * @constructor Create empty Weather logs list adapter
  */
 class LocationLogsListAdapter :
-    BaseListAdapter<WeatherModel, LocationLogsListAdapter.WeatherLogsListViewHolder>(
+    BaseListAdapter<String, LocationLogsListAdapter.WeatherLogsListViewHolder>(
         LocationLogsListDiffCallback()
     ) {
 
@@ -32,7 +32,7 @@ class LocationLogsListAdapter :
             binding = layoutItemBinding,
             itemClickListener = this.listItemClickListener,
             arrayViewClickable = arrayOf(
-                layoutItemBinding.tvName
+                layoutItemBinding.tvHead
             )
         )
     }
@@ -48,7 +48,7 @@ class LocationLogsListAdapter :
      */
     class WeatherLogsListViewHolder(
         val binding: LayoutMainpageLogsBinding,
-        itemClickListener: (WeatherModel, Int, Int) -> Unit,
+        itemClickListener: (String, Int, Int) -> Unit,
         arrayViewClickable: Array<View>
-    ) : BaseViewHolder<WeatherModel>(binding, itemClickListener, arrayViewClickable)
+    ) : BaseViewHolder<String>(binding, itemClickListener, arrayViewClickable)
 }

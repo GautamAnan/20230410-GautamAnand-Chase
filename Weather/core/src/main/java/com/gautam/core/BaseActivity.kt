@@ -75,4 +75,6 @@ abstract class BaseActivity<B : ViewDataBinding, E : BaseEvent, D : BaseData, ou
         }
 
 
+
+
 }
