@@ -24,10 +24,11 @@ interface ResponseMapper {
     suspend fun <E, R> execute(
         service: suspend () -> Response<E>,
         success: (E, Int) -> R,
-        failure: (Int) -> Error = { _ -> Error.RemoteError() }
+        failure: (Int, String) -> Error = { _, _ -> Error.RemoteError() }
     ) = try {
-        service().mapResult(failure = { Result.Failure(failure(it.code())) },
-            success = { Result.Success(success(it.body()!!, it.code())) })
+        service().mapResult(failure = {
+            Result.Failure(failure(it.code(), it.message()))
+        }, success = { Result.Success(success(it.body()!!, it.code())) })
     } catch (exception: Exception) {
         Result.Failure(Error.GenericError(message = exception.message.toString()))
     }

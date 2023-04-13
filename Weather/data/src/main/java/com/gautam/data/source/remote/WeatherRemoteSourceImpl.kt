@@ -29,8 +29,8 @@ class WeatherRemoteSourceImpl(
             success = { entity, _ ->
                 mapper.toCurrentWeatherModel(entity)
             },
-            failure = {
-                Error.RemoteError(it)
+            failure = { code, msg ->
+                Error.RemoteError(code,msg)
             }
         )
 
@@ -46,8 +46,8 @@ class WeatherRemoteSourceImpl(
             success = { entity, _ ->
                 mapper.toCurrentWeatherModel(entity)
             },
-            failure = {
-                Error.RemoteError(it)
+            failure = {code, msg ->
+                Error.RemoteError(code,msg)
             }
         )
 }

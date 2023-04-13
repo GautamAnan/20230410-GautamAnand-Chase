@@ -13,7 +13,7 @@ object ImagesCache {
         val cacheSize = maxMemory / 8
         println("cache size = $cacheSize")
         imagesWarehouse = object : LruCache<String, Bitmap>(cacheSize) {
-            protected override fun sizeOf(key: String?, value: Bitmap): Int {
+            override fun sizeOf(key: String?, value: Bitmap): Int {
                 // The cache size will be measured in kilobytes rather than number of items.
                 val bitmapByteCount = value.rowBytes * value.height
                 return bitmapByteCount / 1024
