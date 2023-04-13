@@ -1,5 +1,6 @@
 package com.gautam.data.source.remote.mapper
 
+import com.gautam.core.utils.DateUtils
 import com.gautam.data.entity.CurrentWeather
 import com.gautam.domain.model.*
 
@@ -43,7 +44,13 @@ class WeatherMapper {
                 CloudModel(it.all)
             },
             sysModel = entity.sys?.let {
-                SysModel(it.type, it.id, it.country, it.sunrise, it.sunset)
+                SysModel(
+                    it.type,
+                    it.id,
+                    it.country,
+                    DateUtils.getCurrentDate(it.sunrise?.times(1000) ?: 0L),
+                    DateUtils.getCurrentDate(it.sunset?.times(1000) ?: 0L)
+                )
             },
             visibility = entity.visibility
         )

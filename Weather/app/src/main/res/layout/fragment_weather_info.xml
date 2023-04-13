@@ -42,20 +42,20 @@
 
 
                 <TextView
-                    android:layout_marginTop="50dp"
                     android:id="@+id/tvLocation"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:drawablePadding="5dp"
+                    android:onClickListener="@{sharedViewModel.changeLocation}"
+                    android:text="@{sharedData.model.name}"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:layout_height="wrap_content"
-                    android:text="@{sharedData.model.name}"
-                    tools:text="Pune"
-                    android:onClickListener="@{sharedViewModel.changeLocation}"
-                    android:drawablePadding="5dp"
+                    app:drawableEndCompat="@drawable/editing"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:drawableEndCompat="@drawable/editing" />
+                    tools:text="Pune" />
 
 
                 <ImageView
@@ -152,6 +152,29 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ll_cloud_cover"
                     app:value="@{@string/visibilty_setting(sharedData.model.visibility)}" />
+
+                <include
+                    android:id="@+id/ll_sunrise"
+                    layout="@layout/layout_column_conditions_weather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:key="@{@string/sunrise}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_visibilty"
+                    app:value="@{sharedData.model.sysModel.sunrise}" />
+
+                <include
+                    android:id="@+id/ll_sunset"
+                    layout="@layout/layout_column_conditions_weather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:key="@{@string/sunset}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_sunrise"
+                    app:value="@{sharedData.model.sysModel.sunset}" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

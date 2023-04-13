@@ -10,4 +10,6 @@
     <string name="cloud_cover">Cloud Cover</string>
     <string name="visibilty">Visibility</string>
     <string name="todays_details">%s - %s</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
 </resources>

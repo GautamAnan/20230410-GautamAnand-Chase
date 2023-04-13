@@ -8,7 +8,7 @@ import org.koin.core.component.KoinComponent
 
 abstract class BaseViewModel<D : BaseData, E : BaseEvent>(
     application: Application,
-    protected val data: D
+    val data: D
 ) : AndroidViewModel(application), KoinComponent {
     val liveEvents: SingleLiveEvent<E> = SingleLiveEvent()
 
