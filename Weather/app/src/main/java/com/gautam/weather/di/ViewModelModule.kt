@@ -18,7 +18,6 @@ val presentationModule = module {
             data = WeatherData(),
             get(),
             get(),
-            get()
         )
     }
 

@@ -64,6 +64,12 @@ dependencies {
     implementation commonDependencies.locationServices
     implementation commonDependencies.gmap
     testImplementation  commonDependencies.junit
-    androidTestImplementation  commonDependencies.junit_test
+    testImplementation  commonDependencies.truth
+    testImplementation  commonDependencies.mockito_core
+    testImplementation  commonDependencies.mokito_kotlin
+    testImplementation  commonDependencies.mokito_inline
+    testImplementation  commonDependencies.core_testing
+    testImplementation  commonDependencies.coroutines_test
     androidTestImplementation  commonDependencies.espresso_test
+
 }

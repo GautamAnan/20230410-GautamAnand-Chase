@@ -46,6 +46,14 @@ ext {
             junit_test                 : "androidx.test.ext:junit:$junit_ext_ver",
             espresso_test              : "androidx.test.espresso:espresso-core:$espresso_ver",
             gmap                       : "com.google.android.gms:play-services-maps:$gmap_version",
-            couroutine_version         : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9",
+            couroutine_version         : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.1",
+            truth                      : "com.google.truth:truth:1.1.3",
+            mockito_core               : "org.mockito:mockito-core:3.12.4",
+            mokito_kotlin              : "com.nhaarman:mockito-kotlin-kt1.1:1.5.0",
+            mokito_inline              : "org.mockito:mockito-inline:2.21.0",
+            coroutines_test            : "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1",
+            core_testing               : "androidx.arch.core:core-testing:2.1.0"
+
+
     ]
 }

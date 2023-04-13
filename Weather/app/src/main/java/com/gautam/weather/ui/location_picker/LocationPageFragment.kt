@@ -25,8 +25,12 @@ class LocationPageFragment :
     override fun eventUpdated(event: BaseEvent) {
         when (event) {
             is LocationPageEvent.OnLocationSelected -> {
-                sharedViewModel.getWeatherByName(event.area)
-                sharedViewModel.updateEvent(WeatherEvents.CallHomeScreen)
+                if (isConnected()) {
+                    sharedViewModel.getWeatherByName(event.area)
+                    sharedViewModel.updateEvent(WeatherEvents.CallHomeScreen)
+                } else {
+                    context?.displayErrorDialog("Network Not connected")
+                }
             }
             is LocationPageEvent.OnCloseBtn -> {
                 sharedViewModel.onBackClicked.invoke()

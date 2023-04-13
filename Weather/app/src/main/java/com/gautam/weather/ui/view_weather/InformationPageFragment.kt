@@ -74,34 +74,37 @@ class InformationPageFragment :
 
     @SuppressLint("MissingPermission")
     private fun runTheLocationService() {
-        fusedLocationClient?.lastLocation
-            ?.addOnSuccessListener { it ->
-                if (it != null) {
-                    sharedViewModel.getWeatherByLocation(LatLng(it.latitude, it.longitude))
-                } else {
-                    locationCallback = object : LocationCallback() {
-                        override fun onLocationResult(locationResult: LocationResult) {
-                            locationResult.locations.let {
-                                sharedViewModel.getWeatherByLocation(
-                                    LatLng(
-                                        it[0].latitude,
-                                        it[0].longitude
+        if (isConnected()) {
+            fusedLocationClient?.lastLocation
+                ?.addOnSuccessListener { it ->
+                    if (it != null) {
+                        sharedViewModel.getWeatherByLocation(LatLng(it.latitude, it.longitude))
+                    } else {
+                        locationCallback = object : LocationCallback() {
+                            override fun onLocationResult(locationResult: LocationResult) {
+                                locationResult.locations.let {
+                                    sharedViewModel.getWeatherByLocation(
+                                        LatLng(
+                                            it[0].latitude,
+                                            it[0].longitude
+                                        )
                                     )
-                                )
-                                if (fusedLocationClient != null) {
-                                    fusedLocationClient!!.removeLocationUpdates(locationCallback)
+                                    if (fusedLocationClient != null) {
+                                        fusedLocationClient!!.removeLocationUpdates(locationCallback)
+                                    }
                                 }
                             }
                         }
+                        fusedLocationClient?.requestLocationUpdates(
+                            locationRequest,
+                            locationCallback,
+                            null
+                        )
                     }
-                    fusedLocationClient?.requestLocationUpdates(
-                        locationRequest,
-                        locationCallback,
-                        null
-                    )
                 }
-            }
-
+        } else {
+            context?.displayErrorDialog("Network Not connected")
+        }
     }
 
 
