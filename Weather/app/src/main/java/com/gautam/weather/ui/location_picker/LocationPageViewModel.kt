@@ -2,13 +2,13 @@ package com.gautam.weather.ui.location_picker
 
 import android.app.Application
 import android.view.View
-import com.gautam.core.BaseViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 
 
-class LocationPageViewModel(
-    application: Application,
-    data: LocationPageData
-) : BaseViewModel<LocationPageData, LocationPageEvent>(application, data) {
+class LocationPageViewModel() : ViewModel() {
+
+    val listHistory: MutableLiveData<List<String>> = MutableLiveData(emptyList())
 
     val onActionDoneListener = { saveAndSearch() }
 
@@ -17,20 +17,20 @@ class LocationPageViewModel(
     }
 
     val cancelBtnClicked = View.OnClickListener {
-        updateEvent(LocationPageEvent.OnCloseBtn)
+        //updateEvent(LocationPageEvent.OnCloseBtn)
     }
 
     private fun saveAndSearch() {
-        data.textToSearch.value?.run {
+       /* data.textToSearch.value?.run {
             updateEvent(LocationPageEvent.OnLocationSelected(this))
-        }
+        }*/
     }
 
     val onClickHistory: (model: Any, viewId: Int, clickedPosition: Int) -> Unit =
         { model, _, _ ->
-            updateEvent(LocationPageEvent.OnLocationSelected(model as String))
+          ///  updateEvent(LocationPageEvent.OnLocationSelected(model as String))
         }
 
-    val historyData = data.listHistory
+    //val historyData = data.listHistory
 
 }

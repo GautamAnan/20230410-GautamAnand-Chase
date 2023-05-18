@@ -31,14 +31,11 @@ android {
 dependencies {
     implementation project(":core")
     implementation commonDependencies.kotlin
-    implementation commonDependencies.ktx
     implementation commonDependencies.koin
     implementation commonDependencies.interceptor
     implementation commonDependencies.retrofit
     implementation commonDependencies.gsonConverter
     implementation commonDependencies.gson
     implementation commonDependencies.locationServices
-    implementation commonDependencies.glide
     implementation commonDependencies.gmap
-    testImplementation  commonDependencies.junit
 }

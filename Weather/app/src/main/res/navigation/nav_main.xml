@@ -9,7 +9,7 @@
         android:label="InformationPageFragment" />
     <fragment
         android:id="@+id/locationFragment"
-        android:name="com.gautam.weather.ui.location_picker.LocationPageFragment"
+        android:name="com.gautam.weather.ui.location_picker.LocationPage"
         android:label="LocationPageFragment" />
 
 </navigation>

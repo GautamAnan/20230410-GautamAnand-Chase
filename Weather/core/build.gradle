@@ -28,26 +28,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        dataBinding true
-        viewBinding true
-    }
 }
 
 dependencies {
     implementation commonDependencies.kotlin
-    implementation commonDependencies.ktx
-    implementation commonDependencies.koin
-    implementation commonDependencies.koinViewmodel
-    implementation commonDependencies.koinExt
-    implementation commonDependencies.material
     implementation commonDependencies.retrofit
-    implementation commonDependencies.appcompat
-    implementation commonDependencies.viewModel
-    implementation commonDependencies.picasso
-    implementation commonDependencies.glide
-    testImplementation  commonDependencies.junit
-    androidTestImplementation  commonDependencies.junit_test
-    androidTestImplementation  commonDependencies.espresso_test
     implementation commonDependencies.couroutine_version
 }

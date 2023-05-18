@@ -1,58 +1,67 @@
 package com.gautam.weather.ui
 
-import android.Manifest
-import android.os.Build
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.recyclerview.widget.SimpleItemAnimator
-import com.gautam.core.BaseActivity
-import com.gautam.core.BaseEvent
-import com.gautam.core.fundamentals.displayErrorDialog
-import com.gautam.weather.R
-import com.gautam.weather.databinding.ActivityWeatherBinding
-import com.gautam.weather.ui.location_picker.list_logs.LocationLogsListAdapter
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.gautam.weather.theme.WeatherAppTheme
+import com.gautam.weather.ui.view_weather.InformationPage
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class WeatherActivity :
-    BaseActivity<ActivityWeatherBinding, WeatherEvents, WeatherData, WeatherViewModel>(
-        WeatherViewModel::class,
-        R.layout.activity_weather
-    ) {
-    private lateinit var navController: NavController
-    private lateinit var navigationHost: NavHostFragment
+class WeatherActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        navigationHost =
-            supportFragmentManager.findFragmentById(R.id.fcvContainer) as NavHostFragment
-        navController = navigationHost.navController
+        setContent {
+            WeatherAppTheme {
+                val navController = rememberNavController()
+                val viewModel: WeatherViewModel by viewModel()
 
-    }
-    override fun eventUpdated(event: BaseEvent) {
-       when(event){
-           is WeatherEvents.ChangeLocation->{
-               navController.navigate(R.id.locationFragment)
-           }
-           is WeatherEvents.CallHomeScreen -> {
-               finishCurrentFragment()
-           }
+                NavHost(navController = navController, startDestination = "Information") {
+                    composable("Information") {
+                        InformationPage(navController= navController, sharedViewModel = viewModel)
+                    }
+                    composable("view/{userName}") {
+                      //  Screen2(it.arguments?.getString("userName"))
+                    }
+                }
 
-           is WeatherEvents.NetworkError -> {
-               this.displayErrorDialog("No network connection. Please try again")
-           }
-
-           is WeatherEvents.CallError -> {
-               this.displayErrorDialog(event.errorMsg)
-           }
-       }
-    }
-
-    private fun finishCurrentFragment() {
-        if (!navController.popBackStack()) {
-            finish()
+            }
         }
     }
 
+    /*  override fun eventUpdated(event: BaseEvent) {
+         when(event){
+
+
+             is WeatherEvents.NetworkError -> {
+                 this.displayErrorDialog("No network connection. Please try again")
+             }
+
+             is WeatherEvents.CallError -> {
+                 this.displayErrorDialog(event.errorMsg)
+             }
+         }
+      }
+
+
+  */
+}
+
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun GreetingPreview() {
+    WeatherAppTheme {
+       // InformationPage()
+    }
 }

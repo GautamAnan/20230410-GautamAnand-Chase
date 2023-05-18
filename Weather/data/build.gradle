@@ -32,17 +32,11 @@ dependencies {
     implementation project(":domain")
     implementation project(":core")
     implementation commonDependencies.kotlin
-    implementation commonDependencies.ktx
     implementation commonDependencies.koin
-    implementation commonDependencies.viewModel
     implementation commonDependencies.interceptor
     implementation commonDependencies.retrofit
     implementation commonDependencies.gsonConverter
     implementation commonDependencies.gson
-    implementation commonDependencies.glide
     implementation commonDependencies.locationServices
-    testImplementation  commonDependencies.junit
     implementation commonDependencies.gmap
-    androidTestImplementation  commonDependencies.junit_test
-    androidTestImplementation  commonDependencies.espresso_test
 }

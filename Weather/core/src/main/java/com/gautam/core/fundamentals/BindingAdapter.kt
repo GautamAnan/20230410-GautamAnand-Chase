@@ -1,3 +1,4 @@
+/*
 package com.gautam.core.fundamentals
 
 import android.graphics.Bitmap
@@ -92,4 +93,4 @@ object BindingAdapter {
     }
 
 
-}
+}*/

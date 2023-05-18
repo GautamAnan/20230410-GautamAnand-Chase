@@ -1,3 +1,4 @@
+/*
 package com.gautam.weather.ui.location_picker.list_logs
 
 import android.view.LayoutInflater
@@ -9,11 +10,13 @@ import com.gautam.domain.model.WeatherModel
 import com.gautam.weather.databinding.LayoutMainpageLogsBinding
 
 
+*/
 /**
  * Weather logs list adapter
  *
  * @constructor Create empty Weather logs list adapter
- */
+ *//*
+
 class LocationLogsListAdapter :
     BaseListAdapter<String, LocationLogsListAdapter.WeatherLogsListViewHolder>(
         LocationLogsListDiffCallback()
@@ -37,7 +40,8 @@ class LocationLogsListAdapter :
         )
     }
 
-    /**
+    */
+/**
      * Weather logs list view holder
      *
      * @property binding
@@ -45,10 +49,11 @@ class LocationLogsListAdapter :
      *
      * @param itemClickListener
      * @param arrayViewClickable
-     */
+     *//*
+
     class WeatherLogsListViewHolder(
         val binding: LayoutMainpageLogsBinding,
         itemClickListener: (String, Int, Int) -> Unit,
         arrayViewClickable: Array<View>
     ) : BaseViewHolder<String>(binding, itemClickListener, arrayViewClickable)
-}
+}*/
