@@ -12,4 +12,7 @@
     <string name="todays_details">%s - %s</string>
     <string name="sunrise">Sunrise</string>
     <string name="sunset">Sunset</string>
+    <string name="label_search">Search</string>
+    <string name="list_empty">The Data is empty</string>
+    <string name="exit">Exit\n</string>
 </resources>

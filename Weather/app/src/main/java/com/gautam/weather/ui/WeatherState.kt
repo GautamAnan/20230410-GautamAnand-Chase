@@ -1,6 +1,5 @@
 package com.gautam.weather.ui
 
-import androidx.compose.runtime.Stable
 import com.gautam.domain.model.CurrentWeatherModel
 
 sealed class WeatherState {

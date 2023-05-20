@@ -36,10 +36,9 @@ lateinit var locationProvider: FusedLocationProviderClient
 
 private const val LOCATION_TAG = "LOCATION_TAG"
 
-
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun AccompanistPermissionsScreen(currentUserLocation: (LatLng) -> Unit) {
+fun AccompanistPermissionsScreen(sharedViewModel: InformationPageViewModel) {
     val locationPermissionState = rememberMultiplePermissionsState(
         permissions = listOf(
             Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -54,7 +53,7 @@ fun AccompanistPermissionsScreen(currentUserLocation: (LatLng) -> Unit) {
                 .padding(30.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LocationPermissions(multiplePermissionState = locationPermissionState,currentUserLocation)
+            LocationPermissions(multiplePermissionState = locationPermissionState, sharedViewModel)
             Button(
                 onClick = {
                     locationPermissionState.launchMultiplePermissionRequest()
@@ -64,12 +63,13 @@ fun AccompanistPermissionsScreen(currentUserLocation: (LatLng) -> Unit) {
             }
         }
     } else
-        GetUserLocation(currentUserLocation)
+        GetUserLocation(sharedViewModel)
 }
 
 @SuppressLint("MissingPermission")
 @Composable
-private fun GetUserLocation(currentUserLocation: (LatLng) -> Unit) {
+private fun GetUserLocation(sharedViewModel: InformationPageViewModel) {
+
     val context = LocalContext.current
 
     // The Fused Location Provider provides access to location APIs.
@@ -87,8 +87,7 @@ private fun GetUserLocation(currentUserLocation: (LatLng) -> Unit) {
                         location?.let {
                             val lat = location.latitude
                             val long = location.longitude
-                            currentUserLocation.invoke(LatLng(lat, long))
-
+                            sharedViewModel.getWeatherByLocation(LatLng(lat, long))
                         }
                     }
                     .addOnFailureListener {
@@ -103,6 +102,7 @@ private fun GetUserLocation(currentUserLocation: (LatLng) -> Unit) {
         // when the effects leaves the composition, stop location updates
         onDispose {
             stopLocationUpdate()
+
         }
     }
 
@@ -113,14 +113,14 @@ private fun GetUserLocation(currentUserLocation: (LatLng) -> Unit) {
 @Composable
 private fun LocationPermissions(
     multiplePermissionState: MultiplePermissionsState,
-    currentUserLocation: (LatLng) -> Unit
+    sharedViewModel: InformationPageViewModel
 ) {
     PermissionsRequired(
         multiplePermissionsState = multiplePermissionState,
         permissionsNotGrantedContent = { /* ... */ },
         permissionsNotAvailableContent = { /* ... */ }
     ) {
-       GetUserLocation(currentUserLocation = currentUserLocation)
+        GetUserLocation(sharedViewModel = sharedViewModel)
     }
 }
 

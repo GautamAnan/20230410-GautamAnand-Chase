@@ -16,6 +16,8 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.WeatherApp"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        android:allowClearUserData="true"
         tools:targetApi="31">
         <activity
             android:name=".ui.WeatherActivity"
