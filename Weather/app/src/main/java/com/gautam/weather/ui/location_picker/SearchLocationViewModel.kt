@@ -1,5 +1,6 @@
 package com.gautam.weather.ui.location_picker
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,15 +13,18 @@ import kotlinx.coroutines.launch
 
 class SearchLocationViewModel(private val historyUseCase: GetHistoryUseCase) : ViewModel() {
 
-    val topics: MutableLiveData<LocationState> = MutableLiveData(LocationState.NoState)
+    init {
+       fetchTopics("")
+    }
 
+    val topics: MutableLiveData<LocationState> = MutableLiveData(LocationState.NoState)
+    val searchTerm =  mutableStateOf("")
     fun fetchTopics(searchTerm: String) {
         viewModelScope.launch (Dispatchers.IO){
-            topics.postValue(LocationState.Response(emptyList()))
-            //topics.value = LocationState.Loading
+            topics.postValue(LocationState.Loading)
             historyUseCase.execute(HistorySearchParams(searchTerm)).mapResult(
                 success = {
-                    topics.postValue(LocationState.Response(it.historyList))
+                    topics.postValue(LocationState.Response(it.historyList,searchTerm))
                 },
                 failure = {
                     when (it) {

@@ -39,6 +39,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.gautam.domain.usecase.HistoryResult
 
@@ -52,46 +53,49 @@ import org.koin.androidx.compose.koinViewModel
     ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class,
     ExperimentalComposeUiApi::class
 )
+
 @Composable
 fun SearchLocation(
     navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: SearchLocationViewModel = koinViewModel()
 ) {
-    val (searchTerm, updateSearchTerm) = remember { mutableStateOf(TextFieldValue("")) }
     Scaffold(topBar = {
-        AppBar(searchTerm, updateSearchTerm)
-    }) {
-        viewModel.fetchTopics(searchTerm.text)
+        AppBar(viewModel)
+    }, modifier = modifier.fillMaxHeight()) {
         when (val topicStatus = viewModel.topics.value) {
             is LocationState.Response -> {
                 Log.d("Effects", "Call 2")
                 LazyColumn(
                     modifier = modifier
                         .statusBarsPadding()
-                        .fillMaxHeight()
                 ) {
 
                     val topicList = topicStatus.result
-                    items(topicList.size) {
-                        Text(
-                            text = topicList[it],
-                            style = MaterialTheme.typography.bodyLarge,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable(onClick = {
-                                    val listItem = topicList[it]
-                                    navController.navigate("Information/{$listItem}")
-                                })
-                                .padding(
-                                    start = 16.dp,
-                                    top = 8.dp,
-                                    end = 16.dp,
-                                    bottom = 8.dp
-                                )
-                                .wrapContentWidth(Alignment.Start)
-                                .animateItemPlacement()
-                        )
+                    if (topicList.isNotEmpty()) {
+                        items(topicList.size) {
+                            Text(
+                                text = topicList[it],
+                                style = MaterialTheme.typography.bodyLarge,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable(onClick = {
+                                        val listItem = topicList[it]
+                                        navController.navigate("Information/{$listItem}")
+                                    })
+                                    .padding(
+                                        start = 16.dp,
+                                        top = 8.dp,
+                                        end = 16.dp,
+                                        bottom = 8.dp
+                                    )
+                                    .wrapContentWidth(Alignment.Start)
+                                    .animateItemPlacement()
+                            )
+                        }
+                    } else {
+                        val topic = topicStatus.searchTerm
+                        navController.navigate("Information/{$topic}")
                     }
                 }
             }
@@ -129,21 +133,21 @@ fun SearchLocation(
 )
 @Composable
 private fun AppBar(
-    searchTerm: TextFieldValue,
-    updateSearchTerm: (TextFieldValue) -> Unit,
+    viewModel: SearchLocationViewModel,
     keyboardController: SoftwareKeyboardController? = LocalSoftwareKeyboardController.current
 ) {
     TopAppBar(
         title = {
             BasicTextField(
-                value = searchTerm,
-                onValueChange = updateSearchTerm,
+                value = viewModel.searchTerm.value,
+                onValueChange = { viewModel.searchTerm.value = it },
                 textStyle = MaterialTheme.typography.bodyMedium.copy(
                     color = LocalContentColor.current
                 ),
                 maxLines = 1,
                 cursorBrush = SolidColor(LocalContentColor.current),
                 keyboardActions = KeyboardActions(onDone = {
+                    viewModel.fetchTopics(viewModel.searchTerm.value)
                     keyboardController?.hide()
                 }),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
